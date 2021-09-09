@@ -9,13 +9,21 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        NavigationView {
+            
+            Text("ここに日記一覧を表示する予定")
+                .padding()
+            
+            .navigationBarTitle("3 Points Diary", displayMode: .inline)
+            .navigationBarItems(trailing:
+                Button("White"){
+                    print("hello")
+                }
+            )
+                
+            
+        }
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
+
