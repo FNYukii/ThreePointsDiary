@@ -44,8 +44,8 @@ struct ContentView: View {
             //ナビゲーションバーの設定
             .navigationBarTitle("3 Points Diary", displayMode: .inline)
             .navigationBarItems(trailing:
-                Button("White"){
-                    isShowSheet.toggle()
+                Button(action: {isShowSheet.toggle()}) {
+                    Image(systemName: "square.and.pencil")
                 }
             )
                 
