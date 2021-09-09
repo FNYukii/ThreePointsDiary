@@ -15,6 +15,7 @@
 		5499993C26EA522A00D2A4FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5499993A26EA522A00D2A4FC /* LaunchScreen.storyboard */; };
 		5499994726EA522A00D2A4FC /* ThreePointsDiaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5499994626EA522A00D2A4FC /* ThreePointsDiaryTests.swift */; };
 		5499995226EA522A00D2A4FC /* ThreePointsDiaryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5499995126EA522A00D2A4FC /* ThreePointsDiaryUITests.swift */; };
+		5499996026EA5B3E00D2A4FC /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5499995F26EA5B3E00D2A4FC /* EditView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		5499994D26EA522A00D2A4FC /* ThreePointsDiaryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThreePointsDiaryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5499995126EA522A00D2A4FC /* ThreePointsDiaryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreePointsDiaryUITests.swift; sourceTree = "<group>"; };
 		5499995326EA522A00D2A4FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5499995F26EA5B3E00D2A4FC /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				5499993126EA522900D2A4FC /* SceneDelegate.swift */,
 				5499993326EA522900D2A4FC /* ContentView.swift */,
 				5499993526EA522A00D2A4FC /* Assets.xcassets */,
+				5499995F26EA5B3E00D2A4FC /* EditView.swift */,
 				5499993A26EA522A00D2A4FC /* LaunchScreen.storyboard */,
 				5499993D26EA522A00D2A4FC /* Info.plist */,
 				5499993726EA522A00D2A4FC /* Preview Content */,
@@ -268,6 +271,7 @@
 			files = (
 				5499993026EA522900D2A4FC /* AppDelegate.swift in Sources */,
 				5499993226EA522900D2A4FC /* SceneDelegate.swift in Sources */,
+				5499996026EA5B3E00D2A4FC /* EditView.swift in Sources */,
 				5499993426EA522900D2A4FC /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

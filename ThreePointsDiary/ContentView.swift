@@ -8,9 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    //日記編集シートのオンオフ
+    @State var isShowSheet = false
+    
     var body: some View {
         NavigationView {
             
+            //日記一覧
             Form {
                 Section(header: Text("2021-09-09 Thu")) {
                     Text("Webデザインの練習")
@@ -31,16 +36,19 @@ struct ContentView: View {
                 }
             }
             
+            //日記を書くためのシート
+            .sheet(isPresented: $isShowSheet) {
+                EditView()
+            }
                 
-                
+            //ナビゲーションバーの設定
             .navigationBarTitle("3 Points Diary", displayMode: .inline)
             .navigationBarItems(trailing:
                 Button("White"){
-                    print("hello")
+                    isShowSheet.toggle()
                 }
             )
                 
-            
         }
     }
 }
