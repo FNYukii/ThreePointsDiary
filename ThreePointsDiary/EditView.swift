@@ -20,11 +20,11 @@ struct EditView: View {
                 .navigationBarTitle("今日の日記", displayMode: .inline)
                 .navigationBarItems(
                     leading:
-                    Button("Cancel"){
+                    Button("キャンセル"){
                         presentation.wrappedValue.dismiss()
                     },
                     trailing:
-                    Button("Done"){
+                    Button("完了"){
                         saveDiary()
                         presentation.wrappedValue.dismiss()
                     }
