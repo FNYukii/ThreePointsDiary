@@ -8,13 +8,33 @@
 import SwiftUI
 
 struct EditView: View {
+    
+    //この画面の環境変数
+    @Environment(\.presentationMode) var presentation
+    
     var body: some View {
-        Text("このSheetで日記を編集する")
-    }
-}
+        NavigationView {
+            
+            Text("このSheetで日記を編集する")
+            
+                .navigationBarTitle("今日の日記", displayMode: .inline)
+                .navigationBarItems(
+                    leading:
+                    Button("Cancel"){
+                        presentation.wrappedValue.dismiss()
+                    },
+                    trailing:
+                    Button("Done"){
+                        saveDiary()
+                        presentation.wrappedValue.dismiss()
+                    }
+                )
 
-struct EditView_Previews: PreviewProvider {
-    static var previews: some View {
-        EditView()
+        }
     }
+    
+    func saveDiary() {
+        //日記の内容をデータベースに保存する
+    }
+    
 }
