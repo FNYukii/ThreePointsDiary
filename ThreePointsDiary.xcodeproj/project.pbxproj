@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		54012F6C26EB894100BAD9ED /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 54012F6B26EB894100BAD9ED /* FSCalendar */; };
+		54012F6E26EB8A8800BAD9ED /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54012F6D26EB8A8800BAD9ED /* CalendarView.swift */; };
 		5499993026EA522900D2A4FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5499992F26EA522900D2A4FC /* AppDelegate.swift */; };
 		5499993226EA522900D2A4FC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5499993126EA522900D2A4FC /* SceneDelegate.swift */; };
 		5499993426EA522900D2A4FC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5499993326EA522900D2A4FC /* ContentView.swift */; };
@@ -41,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		54012F6D26EB8A8800BAD9ED /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		5499992C26EA522900D2A4FC /* ThreePointsDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThreePointsDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5499992F26EA522900D2A4FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5499993126EA522900D2A4FC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +70,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				54FE9FC626EAE9E0007D9EAB /* RealmSwift in Frameworks */,
+				54012F6C26EB894100BAD9ED /* FSCalendar in Frameworks */,
 				54FE9FC426EAE9E0007D9EAB /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -115,6 +119,7 @@
 				54FE9FC726EAEA19007D9EAB /* Diary.swift */,
 				54FE9FCB26EB8617007D9EAB /* SecondView.swift */,
 				5499993126EA522900D2A4FC /* SceneDelegate.swift */,
+				54012F6D26EB8A8800BAD9ED /* CalendarView.swift */,
 				5499993326EA522900D2A4FC /* ContentView.swift */,
 				54FE9FC926EB8512007D9EAB /* FirstView.swift */,
 				5499993526EA522A00D2A4FC /* Assets.xcassets */,
@@ -171,6 +176,7 @@
 			packageProductDependencies = (
 				54FE9FC326EAE9E0007D9EAB /* Realm */,
 				54FE9FC526EAE9E0007D9EAB /* RealmSwift */,
+				54012F6B26EB894100BAD9ED /* FSCalendar */,
 			);
 			productName = ThreePointsDiary;
 			productReference = 5499992C26EA522900D2A4FC /* ThreePointsDiary.app */;
@@ -245,6 +251,7 @@
 			mainGroup = 5499992326EA522900D2A4FC;
 			packageReferences = (
 				54FE9FC226EAE9E0007D9EAB /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				54012F6A26EB894100BAD9ED /* XCRemoteSwiftPackageReference "FSCalendar" */,
 			);
 			productRefGroup = 5499992D26EA522900D2A4FC /* Products */;
 			projectDirPath = "";
@@ -291,6 +298,7 @@
 			files = (
 				54FE9FCC26EB8617007D9EAB /* SecondView.swift in Sources */,
 				5499993026EA522900D2A4FC /* AppDelegate.swift in Sources */,
+				54012F6E26EB8A8800BAD9ED /* CalendarView.swift in Sources */,
 				54FE9FCA26EB8512007D9EAB /* FirstView.swift in Sources */,
 				54FE9FC826EAEA19007D9EAB /* Diary.swift in Sources */,
 				5499993226EA522900D2A4FC /* SceneDelegate.swift in Sources */,
@@ -626,6 +634,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		54012F6A26EB894100BAD9ED /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.2;
+			};
+		};
 		54FE9FC226EAE9E0007D9EAB /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-cocoa";
@@ -637,6 +653,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		54012F6B26EB894100BAD9ED /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 54012F6A26EB894100BAD9ED /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
+		};
 		54FE9FC326EAE9E0007D9EAB /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 54FE9FC226EAE9E0007D9EAB /* XCRemoteSwiftPackageReference "realm-cocoa" */;
