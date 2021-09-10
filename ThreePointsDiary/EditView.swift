@@ -13,9 +13,9 @@ struct EditView: View {
     @Environment(\.presentationMode) var presentation
     
     //その日のできごと
-    @State var point01 = ""
-    @State var point02 = ""
-    @State var point03 = ""
+    @State var content01 = ""
+    @State var content02 = ""
+    @State var content03 = ""
     
     var body: some View {
         NavigationView {
@@ -23,9 +23,9 @@ struct EditView: View {
             //日記入力フォーム
             Form {
                 Section(header: Text("2021-09-10 The")){
-                    TextField("できごとその1", text: $point01)
-                    TextField("できごとその2", text: $point02)
-                    TextField("できごとその3", text: $point03)
+                    TextField("できごとその1", text: $content01)
+                    TextField("できごとその2", text: $content02)
+                    TextField("できごとその3", text: $content03)
                 }
             }
             
