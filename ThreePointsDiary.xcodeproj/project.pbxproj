@@ -19,6 +19,8 @@
 		54FE9FC426EAE9E0007D9EAB /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 54FE9FC326EAE9E0007D9EAB /* Realm */; };
 		54FE9FC626EAE9E0007D9EAB /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 54FE9FC526EAE9E0007D9EAB /* RealmSwift */; };
 		54FE9FC826EAEA19007D9EAB /* Diary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FE9FC726EAEA19007D9EAB /* Diary.swift */; };
+		54FE9FCA26EB8512007D9EAB /* FirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FE9FC926EB8512007D9EAB /* FirstView.swift */; };
+		54FE9FCC26EB8617007D9EAB /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FE9FCB26EB8617007D9EAB /* SecondView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,8 @@
 		5499995326EA522A00D2A4FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5499995F26EA5B3E00D2A4FC /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 		54FE9FC726EAEA19007D9EAB /* Diary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diary.swift; sourceTree = "<group>"; };
+		54FE9FC926EB8512007D9EAB /* FirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstView.swift; sourceTree = "<group>"; };
+		54FE9FCB26EB8617007D9EAB /* SecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,8 +113,10 @@
 			children = (
 				5499992F26EA522900D2A4FC /* AppDelegate.swift */,
 				54FE9FC726EAEA19007D9EAB /* Diary.swift */,
+				54FE9FCB26EB8617007D9EAB /* SecondView.swift */,
 				5499993126EA522900D2A4FC /* SceneDelegate.swift */,
 				5499993326EA522900D2A4FC /* ContentView.swift */,
+				54FE9FC926EB8512007D9EAB /* FirstView.swift */,
 				5499993526EA522A00D2A4FC /* Assets.xcassets */,
 				5499995F26EA5B3E00D2A4FC /* EditView.swift */,
 				5499993A26EA522A00D2A4FC /* LaunchScreen.storyboard */,
@@ -283,7 +289,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54FE9FCC26EB8617007D9EAB /* SecondView.swift in Sources */,
 				5499993026EA522900D2A4FC /* AppDelegate.swift in Sources */,
+				54FE9FCA26EB8512007D9EAB /* FirstView.swift in Sources */,
 				54FE9FC826EAEA19007D9EAB /* Diary.swift in Sources */,
 				5499993226EA522900D2A4FC /* SceneDelegate.swift in Sources */,
 				5499996026EA5B3E00D2A4FC /* EditView.swift in Sources */,
