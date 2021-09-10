@@ -16,7 +16,7 @@ struct ContentView: View, MyProtocol {
     @State var isShowSheet = false
     
     //編集対象の日記
-    @State var editDiaryId = 0
+    @State var selectedDiaryId = 0
     
     //全てのDiaryを取得
     @State var diarys = Diary.all()
@@ -33,7 +33,8 @@ struct ContentView: View, MyProtocol {
                         Text(diary.content03)
                     }
                     .onTapGesture {
-                        editDiaryId = diary.id
+                        selectedDiaryId = diary.id
+                        print("editDiaryId: \(selectedDiaryId)")
                         isShowSheet.toggle()
                     }
                 }
@@ -41,13 +42,17 @@ struct ContentView: View, MyProtocol {
             
             //日記を書くためのシート
             .sheet(isPresented: $isShowSheet) {
-                EditView(diaryId: editDiaryId, myProtocol: self)
+                EditView(myProtocol: self)
             }
                 
             //ナビゲーションバーの設定
             .navigationBarTitle("3 Points Diary", displayMode: .inline)
             .navigationBarItems(trailing:
-                Button(action: {isShowSheet.toggle()}) {
+                Button(action: {
+                    selectedDiaryId = 0
+                    print("editDiaryId: \(selectedDiaryId)")
+                    isShowSheet.toggle()
+                }) {
                     Image(systemName: "square.and.pencil")
                 }
             )
@@ -78,10 +83,15 @@ struct ContentView: View, MyProtocol {
         return formatter.shortWeekdaySymbols[weekdaySymbolIndex]
     }
     
+    //EditViewにselectedDiaryIdを渡す
+    func getSelectedDiaryId() -> Int {
+        return selectedDiaryId
+    }
+    
 }
 
 //EditViewからContentViewの関数を実行するためのProtocol
 protocol MyProtocol {
     func reloadDiarys()
-    func ymdText(createdDate: Date) -> String
+    func getSelectedDiaryId() -> Int
 }

@@ -11,7 +11,7 @@ import RealmSwift
 struct EditView: View {
     
     //編集対象の日記のID 0なら新規日記作成
-    let diaryId: Int
+    @State var diaryId: Int = 0
     
     //ContentViewの関数を使うためのprotocol
     var myProtocol: MyProtocol
@@ -55,6 +55,8 @@ struct EditView: View {
                 }
             }
             .onAppear {
+                //編集対象の日記のIDを取得
+                diaryId = myProtocol.getSelectedDiaryId()
                 //B. diaryが0以外なら、既存レコードを取得
                 if diaryId != 0 {
                     let realm = try! Realm()
