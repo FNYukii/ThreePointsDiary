@@ -76,7 +76,7 @@ struct EditView: View {
                       primaryButton: .cancel(Text("キャンセル")),
                       secondaryButton: .destructive(Text("削除"), action: {
                             deleteDiary()
-                            myProtocol.reloadDiarys()
+                            myProtocol.reloadDiaries()
                             presentation.wrappedValue.dismiss()
                       })
                 )
@@ -90,7 +90,7 @@ struct EditView: View {
                 },
                 trailing:Button("完了"){
                     saveDiary()
-                    myProtocol.reloadDiarys()
+                    myProtocol.reloadDiaries()
                     presentation.wrappedValue.dismiss()
                 }
             )

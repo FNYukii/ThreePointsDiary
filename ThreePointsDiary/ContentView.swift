@@ -19,14 +19,14 @@ struct ContentView: View, MyProtocol {
     @State var selectedDiaryId = 0
     
     //全てのDiaryを取得
-    @State var diarys = Diary.all()
+    @State var diaries = Diary.all()
     
     var body: some View {
         NavigationView {
             
             //日記一覧
             Form {
-                ForEach(diarys.freeze()) { diary in
+                ForEach(diaries.freeze()) { diary in
                     Section(header: Text("\(ymdText(createdDate: diary.createdDate)) \(weekdayText(createdDate: diary.createdDate))")) {
                         Text(diary.content01)
                         Text(diary.content02)
@@ -59,8 +59,8 @@ struct ContentView: View, MyProtocol {
     }
     
     //リストを再描画
-    func reloadDiarys() {
-        diarys = Diary.all()
+    func reloadDiaries() {
+        diaries = Diary.all()
     }
     
     //Date型変数を年月日のみの文字列に変換する
@@ -90,6 +90,6 @@ struct ContentView: View, MyProtocol {
 
 //EditViewからContentViewの関数を実行するためのProtocol
 protocol MyProtocol {
-    func reloadDiarys()
+    func reloadDiaries()
     func getSelectedDiaryId() -> Int
 }
