@@ -34,7 +34,6 @@ struct ContentView: View, MyProtocol {
                     }
                     .onTapGesture {
                         selectedDiaryId = diary.id
-                        print("editDiaryId: \(selectedDiaryId)")
                         isShowSheet.toggle()
                     }
                 }
@@ -50,7 +49,6 @@ struct ContentView: View, MyProtocol {
             .navigationBarItems(trailing:
                 Button(action: {
                     selectedDiaryId = 0
-                    print("editDiaryId: \(selectedDiaryId)")
                     isShowSheet.toggle()
                 }) {
                     Image(systemName: "square.and.pencil")
