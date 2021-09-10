@@ -6,11 +6,26 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct SecondView: View{
     
     //カレンダー上で選択された日付
-    @State var selectedDate = Date()
+    @State var selectedDate = Date() {
+        willSet(newValue) {
+            print(newValue)
+            searchDiary()
+        }
+    }
+    
+    //検索条件に一致する日記
+    @State var diaries = Diary.all()
+    
+    //日記編集シートのオンオフ
+    @State var isShowSheet = false
+    
+    //編集対象の日記
+    @State var selectedDiaryId = 0
     
     var body: some View {
         
@@ -19,14 +34,15 @@ struct SecondView: View{
                 CalendarView(selectedDate: $selectedDate)
                     .frame(height: 400)
             }
-            Section(header: Text("\(ymdText(inputDate: selectedDate)) \(weekdayText(inputDate: selectedDate))")) {
-                Text("Apple")
-                Text("Orange")
-                Text("Strawberry")
-            }
-            
+            Text("\(selectedDate)")
         }
         
+    }
+    
+    //タップした日記を編集
+    func editDiary(diaryId: Int) {
+        selectedDiaryId = diaryId
+        isShowSheet.toggle()
     }
     
     //Date型変数を年月日のみの文字列に変換する
@@ -46,6 +62,13 @@ struct SecondView: View{
         let formatter: DateFormatter = DateFormatter()
         formatter.locale = NSLocale(localeIdentifier: "ja") as Locale
         return formatter.shortWeekdaySymbols[weekdaySymbolIndex]
+    }
+    
+    //選択された日に作成された日記を検索する
+    func searchDiary() {
+        print(selectedDate)
+//        let realm = try! Realm()
+//        diaries = realm.objects(Diary.self).filter("createdDate == \(selectedDate)")
     }
     
 }
