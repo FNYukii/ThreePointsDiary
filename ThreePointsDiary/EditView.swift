@@ -32,30 +32,27 @@ struct EditView: View {
     
     //ナビゲーションバーのタイトル
     @State var navBarTitle = "新しい日記"
+    
+    //削除アラートのオンオフ
+    @State var isShowAlert = false
         
     var body: some View {
         NavigationView {
             
             //日記入力フォーム
             Form {
-                
                 DatePicker("作成日", selection: $createdDate, displayedComponents: .date)
-                
                 Section {
                     TextField("できごとその1", text: $content01)
                     TextField("できごとその2", text: $content02)
                     TextField("できごとその3", text: $content03)
                 }
-                
                 if diaryId != 0 {
-                    Button("この日記を削除"){
-                        deleteDiary()
-                        myProtocol.reloadDiarys()
-                        presentation.wrappedValue.dismiss()
+                    Button("日記を削除"){
+                        isShowAlert.toggle()
                     }
                     .foregroundColor(.red)
                 }
-                
             }
             .onAppear {
                 //B. diaryが0以外なら、既存レコードを取得
@@ -68,6 +65,19 @@ struct EditView: View {
                     content03 = diary!.content03
                     navBarTitle = "日記を編集"
                 }
+            }
+            
+            //削除確認用アラート
+            .alert(isPresented: $isShowAlert) {
+                Alert(title: Text("確認"),
+                      message: Text("この日記を削除してもよろしいですか？"),
+                      primaryButton: .cancel(Text("キャンセル")),
+                      secondaryButton: .destructive(Text("削除"), action: {
+                            deleteDiary()
+                            myProtocol.reloadDiarys()
+                            presentation.wrappedValue.dismiss()
+                      })
+                )
             }
             
             //ナビゲーションバーの設定
