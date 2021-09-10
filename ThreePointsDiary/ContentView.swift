@@ -70,7 +70,7 @@ struct ContentView: View, MyProtocol {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ja_JP")
         dateFormatter.dateStyle = .medium
-        dateFormatter.dateFormat = "yyyy年 M月 dd日"
+        dateFormatter.dateFormat = "yyyy年 M月 d日"
         return dateFormatter.string(from: createdDate)
     }
     
