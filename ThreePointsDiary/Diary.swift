@@ -12,7 +12,7 @@ class Diary: Object, Identifiable {
     
     //列を定義
     @objc dynamic var id = 0
-    @objc dynamic var createdDate = ""
+    @objc dynamic var createdDate = Date()
     @objc dynamic var content01 = ""
     @objc dynamic var content02 = ""
     @objc dynamic var content03 = ""
