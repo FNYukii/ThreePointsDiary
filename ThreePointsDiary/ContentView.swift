@@ -66,12 +66,12 @@ struct ContentView: View, MyProtocol {
         dateFormatter.locale = Locale(identifier: "ja_JP")
         dateFormatter.dateStyle = .medium
         dateFormatter.dateFormat = "yyyy年 MM月 dd日"
-        return dateFormatter.string(from: Date())
+        return dateFormatter.string(from: createdDate)
     }
     
     //Date型変数を曜日のみの文字列に変換する
     func weekdayText(createdDate: Date) -> String {
-        let weekdayNumber = calendar.component(.weekday, from: Date())
+        let weekdayNumber = calendar.component(.weekday, from: createdDate)
         let weekdaySymbolIndex: Int = weekdayNumber - 1
         let formatter: DateFormatter = DateFormatter()
         formatter.locale = NSLocale(localeIdentifier: "ja") as Locale
