@@ -22,7 +22,7 @@ struct EditView: View {
             
             //日記入力フォーム
             Form {
-                Section(header: Text("2021-09-09 The")){
+                Section(header: Text("2021-09-10 The")){
                     TextField("できごとその1", text: $point01)
                     TextField("できごとその2", text: $point02)
                     TextField("できごとその3", text: $point03)
@@ -32,12 +32,10 @@ struct EditView: View {
             //ナビゲーションバーの設定
             .navigationBarTitle("今日の日記", displayMode: .inline)
             .navigationBarItems(
-                leading:
-                Button("キャンセル"){
+                leading:Button("キャンセル"){
                     presentation.wrappedValue.dismiss()
                 },
-                trailing:
-                Button("完了"){
+                trailing:Button("完了"){
                     saveDiary()
                     presentation.wrappedValue.dismiss()
                 }
