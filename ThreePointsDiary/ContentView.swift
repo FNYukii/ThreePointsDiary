@@ -28,13 +28,12 @@ struct ContentView: View, MyProtocol {
             Form {
                 ForEach(diaries.freeze()) { diary in
                     Section(header: Text("\(ymdText(createdDate: diary.createdDate)) \(weekdayText(createdDate: diary.createdDate))")) {
-                        Text(diary.content01)
-                        Text(diary.content02)
-                        Text(diary.content03)
-                    }
-                    .onTapGesture {
-                        selectedDiaryId = diary.id
-                        isShowSheet.toggle()
+                        Button("\(diary.content01)"){editDiary(diaryId: diary.id)}
+                            .foregroundColor(.primary)
+                        Button("\(diary.content02)"){editDiary(diaryId: diary.id)}
+                            .foregroundColor(.primary)
+                        Button("\(diary.content03)"){editDiary(diaryId: diary.id)}
+                            .foregroundColor(.primary)
                     }
                 }
             }
@@ -57,6 +56,12 @@ struct ContentView: View, MyProtocol {
             )
                 
         }
+    }
+    
+    //タップした日記を編集
+    func editDiary(diaryId: Int) {
+        selectedDiaryId = diaryId
+        isShowSheet.toggle()
     }
     
     //リストを再描画
