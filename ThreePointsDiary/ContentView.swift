@@ -15,6 +15,9 @@ struct ContentView: View, MyProtocol {
     //日記編集シートのオンオフ
     @State var isShowSheet = false
     
+    //編集対象の日記
+    @State var editDiaryId = 0
+    
     //全てのDiaryを取得
     @State var diarys = Diary.all()
     
@@ -29,12 +32,16 @@ struct ContentView: View, MyProtocol {
                         Text(diary.content02)
                         Text(diary.content03)
                     }
+                    .onTapGesture {
+                        isShowSheet.toggle()
+                        editDiaryId = diary.id
+                    }
                 }
             }
             
             //日記を書くためのシート
             .sheet(isPresented: $isShowSheet) {
-                EditView(myProtocol: self)
+                EditView(diaryId: editDiaryId, myProtocol: self)
             }
                 
             //ナビゲーションバーの設定

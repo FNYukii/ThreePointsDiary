@@ -10,6 +10,9 @@ import RealmSwift
 
 struct EditView: View {
     
+    //編集対象の日記のID 0なら新規日記作成
+    let diaryId: Int
+    
     //ContentViewの関数を使うためのprotocol
     var myProtocol: MyProtocol
     
@@ -30,6 +33,9 @@ struct EditView: View {
     @State var content02 = ""
     @State var content03 = ""
     
+    //ナビゲーションバーのタイトル
+    @State var navBarTitle = "新しい日記"
+    
     var body: some View {
         NavigationView {
             
@@ -42,14 +48,26 @@ struct EditView: View {
                 }
             }
             .onAppear {
+                //編集対象日
+                var currentDay = Date()
+                //B. diaryが0以外なら、既存レコードを取得
+                if diaryId != 0 {
+                    let realm = try! Realm()
+                    let diary = realm.objects(Diary.self).filter("id == \(diaryId)").first
+                    currentDay = diary!.createdDate
+                    content01 = diary!.content01
+                    content02 = diary!.content02
+                    content03 = diary!.content03
+                    navBarTitle = "日記を編集"
+                }
                 //ymdTextを生成
                 let dateFormatter = DateFormatter()
                 dateFormatter.locale = Locale(identifier: "ja_JP")
                 dateFormatter.dateStyle = .medium
                 dateFormatter.dateFormat = "yyyy年 MM月 dd日"
-                ymdText = dateFormatter.string(from: Date())
+                ymdText = dateFormatter.string(from: currentDay)
                 //weekdayTextを生成
-                let weekdayNumber = calendar.component(.weekday, from: Date())
+                let weekdayNumber = calendar.component(.weekday, from: currentDay)
                 let weekdaySymbolIndex: Int = weekdayNumber - 1
                 let formatter: DateFormatter = DateFormatter()
                 formatter.locale = NSLocale(localeIdentifier: "ja") as Locale
@@ -57,7 +75,7 @@ struct EditView: View {
             }
             
             //ナビゲーションバーの設定
-            .navigationBarTitle("今日の日記", displayMode: .inline)
+            .navigationBarTitle(navBarTitle,displayMode: .inline)
             .navigationBarItems(
                 leading:Button("キャンセル"){
                     presentation.wrappedValue.dismiss()
@@ -74,22 +92,37 @@ struct EditView: View {
     
     //日記の内容をデータベースに保存する
     func saveDiary() {
-        //Realmをインスタンス化
-        let realm = try! Realm()
-        //新規レコードのidを生成
-        let maxId = realm.objects(Diary.self).sorted(byKeyPath: "id").last?.id ?? 0
-        let newId = maxId + 1
-        //新規レコード作成
-        let diary = Diary()
-        diary.id = newId
-        diary.createdDate = Date()
-        diary.content01 = content01
-        diary.content02 = content02
-        diary.content03 = content03
-        //新規レコード追加
-        try! realm.write {
-            realm.add(diary)
+        
+        //A. 新規レコード追加
+        if diaryId == 0 {
+            //新たなIDを生成して新規レコード作成
+            let realm = try! Realm()
+            let maxId = realm.objects(Diary.self).sorted(byKeyPath: "id").last?.id ?? 0
+            let newId = maxId + 1
+            //新規レコード作成
+            let diary = Diary()
+            diary.id = newId
+            diary.createdDate = Date()
+            diary.content01 = content01
+            diary.content02 = content02
+            diary.content03 = content03
+            //新規レコード追加
+            try! realm.write {
+                realm.add(diary)
+            }
         }
+        
+        //B. 既存レコード更新
+        if diaryId != 0 {
+            let realm = try! Realm()
+            let diary = realm.objects(Diary.self).filter("id == \(diaryId)").first!
+            try! realm.write {
+                diary.content01 = content01
+                diary.content02 = content02
+                diary.content03 = content03
+            }
+        }
+        
     }
     
     //全ての日記を削除する
