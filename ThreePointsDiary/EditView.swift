@@ -22,11 +22,14 @@ struct EditView: View {
     //Date型変数から詳細な情報を取り出すためのCalendarクラス
     let calendar = Calendar(identifier: .gregorian)
     
-    //年月日を表す文字列 (yyyy年mm月dd日)
-    @State var ymdText = ""
+//    //年月日を表す文字列 (yyyy年mm月dd日)
+//    @State var ymdText = ""
+//
+//    //曜日を表す文字列
+//    @State var weekdayText = ""
     
-    //曜日を表す文字列
-    @State var weekdayText = ""
+    //日記作成日
+    @State var createdDate = Date()
     
     //その日のできごと
     @State var content01 = ""
@@ -35,13 +38,16 @@ struct EditView: View {
     
     //ナビゲーションバーのタイトル
     @State var navBarTitle = "新しい日記"
-    
+        
     var body: some View {
         NavigationView {
             
             //日記入力フォーム
             Form {
-                Section(header: Text("\(ymdText) \(weekdayText)")){
+                
+                DatePicker("日記作成日", selection: $createdDate, displayedComponents: .date)
+                
+                Section {
                     TextField("できごとその1", text: $content01)
                     TextField("できごとその2", text: $content02)
                     TextField("できごとその3", text: $content03)
@@ -57,30 +63,31 @@ struct EditView: View {
                 
             }
             .onAppear {
-                //編集対象日
-                var currentDay = Date()
+//                //編集対象日
+//                var currentDay = Date()
                 //B. diaryが0以外なら、既存レコードを取得
                 if diaryId != 0 {
                     let realm = try! Realm()
                     let diary = realm.objects(Diary.self).filter("id == \(diaryId)").first
-                    currentDay = diary!.createdDate
+//                    currentDay = diary!.createdDate
+                    createdDate = diary!.createdDate
                     content01 = diary!.content01
                     content02 = diary!.content02
                     content03 = diary!.content03
                     navBarTitle = "日記を編集"
                 }
-                //ymdTextを生成
-                let dateFormatter = DateFormatter()
-                dateFormatter.locale = Locale(identifier: "ja_JP")
-                dateFormatter.dateStyle = .medium
-                dateFormatter.dateFormat = "yyyy年 MM月 dd日"
-                ymdText = dateFormatter.string(from: currentDay)
-                //weekdayTextを生成
-                let weekdayNumber = calendar.component(.weekday, from: currentDay)
-                let weekdaySymbolIndex: Int = weekdayNumber - 1
-                let formatter: DateFormatter = DateFormatter()
-                formatter.locale = NSLocale(localeIdentifier: "ja") as Locale
-                weekdayText = formatter.shortWeekdaySymbols[weekdaySymbolIndex]
+//                //ymdTextを生成
+//                let dateFormatter = DateFormatter()
+//                dateFormatter.locale = Locale(identifier: "ja_JP")
+//                dateFormatter.dateStyle = .medium
+//                dateFormatter.dateFormat = "yyyy年 MM月 dd日"
+//                ymdText = dateFormatter.string(from: currentDay)
+//                //weekdayTextを生成
+//                let weekdayNumber = calendar.component(.weekday, from: currentDay)
+//                let weekdaySymbolIndex: Int = weekdayNumber - 1
+//                let formatter: DateFormatter = DateFormatter()
+//                formatter.locale = NSLocale(localeIdentifier: "ja") as Locale
+//                weekdayText = formatter.shortWeekdaySymbols[weekdaySymbolIndex]
             }
             
             //ナビゲーションバーの設定
@@ -111,7 +118,7 @@ struct EditView: View {
             //新規レコード作成
             let diary = Diary()
             diary.id = newId
-            diary.createdDate = Date()
+            diary.createdDate = createdDate
             diary.content01 = content01
             diary.content02 = content02
             diary.content03 = content03
@@ -126,6 +133,7 @@ struct EditView: View {
             let realm = try! Realm()
             let diary = realm.objects(Diary.self).filter("id == \(diaryId)").first!
             try! realm.write {
+                diary.createdDate = createdDate
                 diary.content01 = content01
                 diary.content02 = content02
                 diary.content03 = content03
