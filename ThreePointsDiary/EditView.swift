@@ -46,6 +46,15 @@ struct EditView: View {
                     TextField("できごとその2", text: $content02)
                     TextField("できごとその3", text: $content03)
                 }
+                
+                if diaryId != 0 {
+                    Button("この日記を削除"){
+                        deleteDiary()
+                        myProtocol.reloadDiarys()
+                        presentation.wrappedValue.dismiss()
+                    }
+                }
+                
             }
             .onAppear {
                 //編集対象日
@@ -128,7 +137,7 @@ struct EditView: View {
     //全ての日記を削除する
     func deleteDiary() {
         let realm = try! Realm()
-        let results = realm.objects(Diary.self)
+        let results = realm.objects(Diary.self).filter("id == \(diaryId)").first!
         try! realm.write {
             realm.delete(results)
         }
