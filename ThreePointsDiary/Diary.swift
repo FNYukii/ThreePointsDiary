@@ -12,10 +12,10 @@ class Diary: Object, Identifiable {
     
     //列を定義
     @objc dynamic var id = 0
-    @objc dynamic var createdDate: String = ""
-    @objc dynamic var content01: String = ""
-    @objc dynamic var content02: String = ""
-    @objc dynamic var content03: String = ""
+    @objc dynamic var createdDate = ""
+    @objc dynamic var content01 = ""
+    @objc dynamic var content02 = ""
+    @objc dynamic var content03 = ""
     
     //全ての日記を返すメソッド
     static func all() -> Results<Diary> {
