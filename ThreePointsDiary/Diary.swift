@@ -20,7 +20,7 @@ class Diary: Object, Identifiable {
     //全ての日記を返すメソッド
     static func all() -> Results<Diary> {
         let realm = try! Realm()
-        return realm.objects(Diary.self)
+        return realm.objects(Diary.self).sorted(byKeyPath: "id", ascending: false)
     }
 
 }
