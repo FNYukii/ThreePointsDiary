@@ -65,7 +65,7 @@ struct ContentView: View, MyProtocol {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ja_JP")
         dateFormatter.dateStyle = .medium
-        dateFormatter.dateFormat = "yyyy年 MM月 dd日"
+        dateFormatter.dateFormat = "yyyy年 M月 dd日"
         return dateFormatter.string(from: createdDate)
     }
     
@@ -83,4 +83,5 @@ struct ContentView: View, MyProtocol {
 //EditViewからContentViewの関数を実行するためのProtocol
 protocol MyProtocol {
     func reloadDiarys()
+    func ymdText(createdDate: Date) -> String
 }

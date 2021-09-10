@@ -43,9 +43,9 @@ struct EditView: View {
             Form {
                 DatePicker("作成日", selection: $createdDate, displayedComponents: .date)
                 Section {
-                    TextField("できごとその1", text: $content01)
-                    TextField("できごとその2", text: $content02)
-                    TextField("できごとその3", text: $content03)
+                    TextField("記録その1", text: $content01)
+                    TextField("記録その2", text: $content02)
+                    TextField("記録その3", text: $content03)
                 }
                 if diaryId != 0 {
                     Button("日記を削除"){
