@@ -33,8 +33,8 @@ struct ContentView: View, MyProtocol {
                         Text(diary.content03)
                     }
                     .onTapGesture {
-                        isShowSheet.toggle()
                         editDiaryId = diary.id
+                        isShowSheet.toggle()
                     }
                 }
             }
