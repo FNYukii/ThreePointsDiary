@@ -9,7 +9,18 @@ import SwiftUI
 
 struct SecondView: View{
     var body: some View {
-        CalendarView()
-            .frame(height: 400)
+        
+        Form {
+            Section {
+                CalendarView()
+                    .frame(height: 400)
+            }
+            Section {
+                Text("Apple")
+                Text("Orange")
+                Text("Strawberry")
+            }
+        }
+        
     }
 }
