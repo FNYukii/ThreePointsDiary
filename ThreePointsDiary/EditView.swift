@@ -10,6 +10,9 @@ import RealmSwift
 
 struct EditView: View {
     
+    //ContentViewの関数を使うためのprotocol
+    var myProtocol: MyProtocol
+    
     //この画面の環境変数
     @Environment(\.presentationMode) var presentation
     
@@ -57,11 +60,11 @@ struct EditView: View {
             .navigationBarTitle("今日の日記", displayMode: .inline)
             .navigationBarItems(
                 leading:Button("キャンセル"){
-                    deleteDiary()
                     presentation.wrappedValue.dismiss()
                 },
                 trailing:Button("完了"){
                     saveDiary()
+                    myProtocol.reloadDiarys()
                     presentation.wrappedValue.dismiss()
                 }
             )

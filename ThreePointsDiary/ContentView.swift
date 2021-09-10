@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct ContentView: View, MyProtocol {
     
     //Date型変数から詳細な情報を取り出すためのCalendarクラス
     let calendar = Calendar(identifier: .gregorian)
@@ -34,7 +34,7 @@ struct ContentView: View {
             
             //日記を書くためのシート
             .sheet(isPresented: $isShowSheet) {
-                EditView()
+                EditView(myProtocol: self)
             }
                 
             //ナビゲーションバーの設定
@@ -46,6 +46,11 @@ struct ContentView: View {
             )
                 
         }
+    }
+    
+    //リストを再描画
+    func reloadDiarys() {
+        diarys = Diary.all()
     }
     
     //Date型変数を年月日のみの文字列に変換する
@@ -68,4 +73,7 @@ struct ContentView: View {
     
 }
 
-
+//EditViewからContentViewの関数を実行するためのProtocol
+protocol MyProtocol {
+    func reloadDiarys()
+}
