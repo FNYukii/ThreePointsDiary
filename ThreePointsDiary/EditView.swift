@@ -46,20 +46,23 @@ struct EditView: View {
         }
     }
     
+    //日記の内容をデータベースに保存する
     func saveDiary() {
-        //日記の内容をデータベースに保存する
         
+        //Realmをインスタンス化
+        let realm = try! Realm()
+
         //Date型変数から詳細な情報を取り出すためのCalendarクラス
         let calendar = Calendar(identifier: .gregorian)
         
         //新規レコードのidを生成
+        let maxId = realm.objects(Diary.self).sorted(byKeyPath: "id").last?.id ?? 0
+        let newId = maxId + 1
+        
+        //新規レコードの日付テキストを生成
         let createdYear = calendar.component(.year, from: Date())
         let createdMonth = calendar.component(.month, from: Date())
         let createdDay = calendar.component(.day, from: Date())
-        let dateString = String(createdYear) + String(createdMonth) + String(createdDay)
-        let newId = Int(dateString)!
-        
-        //新規レコードの日付テキストを生成
         let weekDayNumber = calendar.component(.weekday, from: Date())
         var weekDayText = ""
         switch weekDayNumber {
@@ -89,15 +92,15 @@ struct EditView: View {
         diary.content01 = content01
         diary.content02 = content02
         diary.content03 = content03
+        
         //新規レコード追加
-        let realm = try! Realm()
         try! realm.write {
             realm.add(diary)
         }
         
     }
     
-    
+    //全ての日記を削除する
     func deleteDiary() {
         let realm = try! Realm()
         let results = realm.objects(Diary.self)
