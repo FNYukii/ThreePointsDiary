@@ -45,13 +45,14 @@ struct ContentView: View, MyProtocol {
             }
                 
             //ナビゲーションバーの設定
-            .navigationBarTitle("3 Points Diary", displayMode: .inline)
+            .navigationBarTitle("3 Points Diary")
             .navigationBarItems(trailing:
                 Button(action: {
                     selectedDiaryId = 0
                     isShowSheet.toggle()
                 }) {
-                    Image(systemName: "square.and.pencil")
+                    Image(systemName: "plus.circle.fill")
+                    Text("新しい日記")
                 }
             )
                 
