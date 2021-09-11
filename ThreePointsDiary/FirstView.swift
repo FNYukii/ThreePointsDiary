@@ -27,7 +27,7 @@ struct FirstView: View, MyProtocol {
             //日記一覧
             Form {
                 ForEach(diaries.freeze()) { diary in
-                    Section(header: Text("\(ymdText(createdDate: diary.createdDate)) \(weekdayText(createdDate: diary.createdDate))")) {
+                    Section(header: Text("\(ymdText(inputDate: diary.createdDate)) \(weekdayText(inputDate: diary.createdDate))")) {
                         Button("\(diary.content01)"){editDiary(diaryId: diary.id)}
                             .foregroundColor(.primary)
                         Button("\(diary.content02)"){editDiary(diaryId: diary.id)}
@@ -70,17 +70,17 @@ struct FirstView: View, MyProtocol {
     }
     
     //Date型変数を年月日のみの文字列に変換する
-    func ymdText(createdDate: Date) -> String {
+    func ymdText(inputDate: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ja_JP")
         dateFormatter.dateStyle = .medium
         dateFormatter.dateFormat = "yyyy年 M月 d日"
-        return dateFormatter.string(from: createdDate)
+        return dateFormatter.string(from: inputDate)
     }
     
     //Date型変数を曜日のみの文字列に変換する
-    func weekdayText(createdDate: Date) -> String {
-        let weekdayNumber = calendar.component(.weekday, from: createdDate)
+    func weekdayText(inputDate: Date) -> String {
+        let weekdayNumber = calendar.component(.weekday, from: inputDate)
         let weekdaySymbolIndex: Int = weekdayNumber - 1
         let formatter: DateFormatter = DateFormatter()
         formatter.locale = NSLocale(localeIdentifier: "ja") as Locale
