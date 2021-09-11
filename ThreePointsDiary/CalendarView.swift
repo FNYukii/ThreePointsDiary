@@ -8,6 +8,7 @@
 import SwiftUI
 import FSCalendar
 import UIKit
+import RealmSwift
 
 struct CalendarView: UIViewRepresentable{
     
@@ -60,13 +61,14 @@ struct CalendarView: UIViewRepresentable{
             //Formatter
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MMM dd, yyyy"
-            //イベント日配列
-            let eventsDate = [
-                Date(),
-                Date(),
-                Calendar.current.date(byAdding: .day, value: +1, to: Date())!,
-                Calendar.current.date(byAdding: .day, value: +5, to: Date())!
-            ]
+            
+            //日記が作成された日の配列を作成
+            var eventsDate: [Date] = []
+            let diaries = Diary.all()
+            for diary in diaries {
+                eventsDate.append(diary.createdDate)
+            }
+                        
             //カレンダーにイベント日を設定
             for eventDate in eventsDate{
                 guard let eventDate = dateFormatter.date(from: dateFormatYMD(date: eventDate)) else { return 0 }
