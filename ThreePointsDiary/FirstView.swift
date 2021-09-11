@@ -91,9 +91,3 @@ struct FirstView: View, MyProtocol {
     }
     
 }
-
-//EditViewからContentViewの関数を実行するためのProtocol
-protocol MyProtocol {
-    func reloadDiaries()
-    func getSelectedDiaryId() -> Int
-}
