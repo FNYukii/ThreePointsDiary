@@ -54,6 +54,19 @@ struct CalendarView: UIViewRepresentable{
         init(_ parent:CalendarView){
             self.parent = parent
         }
+        
+        //ドットを表示されるcalendarメソッド
+        func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd-MM-yyyy"
+            guard let eventDate = dateFormatter.date(from: "24-09-2021") else { return 0 }
+            
+            if date.compare(eventDate) == .orderedSame{
+                return 1
+            }
+            return 0
+        }
+        
         //calendarメソッド
         func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
             parent.selectedDate = date
