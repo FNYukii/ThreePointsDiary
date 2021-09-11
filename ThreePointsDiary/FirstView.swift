@@ -34,6 +34,9 @@ struct FirstView: View, MyProtocol {
                     }
                 }
             }
+            .onAppear {
+                reloadDiaries()
+            }
             
             //日記を書くためのシート
             .sheet(isPresented: $isShowSheet) {

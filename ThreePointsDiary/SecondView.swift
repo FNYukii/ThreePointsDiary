@@ -43,6 +43,9 @@ struct SecondView: View, MyProtocol{
                             .foregroundColor(.primary)
                     }
                 }
+                .onAppear {
+                    reloadDiaries()
+                }
             }
             
             //日記を書くためのシート
