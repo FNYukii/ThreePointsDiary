@@ -57,20 +57,39 @@ struct CalendarView: UIViewRepresentable{
         
         //ドットを表示されるcalendarメソッド
         func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+            //Formatter
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd-MM-yyyy"
-            guard let eventDate = dateFormatter.date(from: "24-09-2021") else { return 0 }
-            
-            if date.compare(eventDate) == .orderedSame{
-                return 1
+            dateFormatter.dateFormat = "MMM dd, yyyy"
+            //イベント日配列
+            let eventsDate = [
+                Date(),
+                Date(),
+                Calendar.current.date(byAdding: .day, value: +1, to: Date())!,
+                Calendar.current.date(byAdding: .day, value: +5, to: Date())!
+            ]
+            //カレンダーにイベント日を設定
+            for eventDate in eventsDate{
+                guard let eventDate = dateFormatter.date(from: dateFormatYMD(date: eventDate)) else { return 0 }
+                if date.compare(eventDate) == .orderedSame{
+                    return 1
+                }
             }
             return 0
+        }
+        
+        //Date型変数を年月日のみに変換するメソッド
+        func dateFormatYMD(date: Date) -> String {
+            let df = DateFormatter()
+            df.dateStyle = .long
+            df.timeStyle = .none
+            return df.string(from: date)
         }
         
         //calendarメソッド
         func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
             parent.selectedDate = date
         }
+        
     }
     
 }
