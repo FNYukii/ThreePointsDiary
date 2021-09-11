@@ -32,7 +32,7 @@ struct SecondView: View{
         Form {
             Section {
                 CalendarView(selectedDate: $selectedDate)
-                    .frame(height: 400)
+                    .frame(height: 350)
                     .onChange(of: selectedDate, perform: { value in
                         searchDiary()
                     })
@@ -80,27 +80,29 @@ struct SecondView: View{
     
     //選択された日に作成された日記を検索する
     func searchDiary() {
-        let realm = try! Realm()
-        
-        //検索対象のDate変数を取得
-        let searchDate = selectedDate
-        
+                
         //開始日時
         let calendar = Calendar(identifier: .gregorian)
-        let startDate = calendar.startOfDay(for: searchDate)
+        let startDate = calendar.startOfDay(for: selectedDate)
         
         //終了日時
-        var compornets = DateComponents()
-        compornets.year = calendar.component(.year, from: searchDate)
-        compornets.month = calendar.component(.month, from: searchDate)
-        compornets.day = calendar.component(.year, from: searchDate)
+        var compornets = calendar
+            .dateComponents([.year, .month, .day,
+                             .hour, .minute, .second,
+                             .nanosecond],
+                             from: selectedDate)
         compornets.hour = 23
         compornets.minute = 59
         compornets.second = 59
         let endDate = calendar.date(from: compornets)
         
-        print("start: \(startDate), end: \(endDate)")
+        print("start: \(startDate)")
+        print("end: \(endDate)")
+        print("selectedDate: \(selectedDate)")
+        print("Date(): \(Date())")
+        print("---------")
 
+        let realm = try! Realm()
 //        diaries = realm.objects(Diary.self).filter("createdDate >= \(startDate) && createdDate < \(endDate)")
     }
     
