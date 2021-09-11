@@ -18,9 +18,6 @@ struct EditView: View {
     
     //この画面の環境変数
     @Environment(\.presentationMode) var presentation
-    
-    //Date型変数から詳細な情報を取り出すためのCalendarクラス
-    let calendar = Calendar(identifier: .gregorian)
         
     //日記作成日
     @State var createdDate = Date()
@@ -107,10 +104,17 @@ struct EditView: View {
             let realm = try! Realm()
             let maxId = realm.objects(Diary.self).sorted(byKeyPath: "id").last?.id ?? 0
             let newId = maxId + 1
+            //作成年月日のInt型変数を作成
+            let calendar = Calendar(identifier: .gregorian)
+            let year = calendar.component(.year, from: createdDate)
+            let month = calendar.component(.month, from: createdDate)
+            let day = calendar.component(.day, from: createdDate)
+            let createdYmd = year * 10000 + month * 100 + day
             //新規レコード作成
             let diary = Diary()
             diary.id = newId
             diary.createdDate = createdDate
+            diary.createdYmd = createdYmd
             diary.content01 = content01
             diary.content02 = content02
             diary.content03 = content03
@@ -122,10 +126,19 @@ struct EditView: View {
         
         //B. 既存レコード更新
         if diaryId != 0 {
+            //作成年月日のInt型変数を作成
+            let calendar = Calendar(identifier: .gregorian)
+            let year = calendar.component(.year, from: createdDate)
+            let month = calendar.component(.month, from: createdDate)
+            let day = calendar.component(.day, from: createdDate)
+            let createdYmd = year * 10000 + month * 100 + day
+            //レコード取得
             let realm = try! Realm()
             let diary = realm.objects(Diary.self).filter("id == \(diaryId)").first!
+            //レコード更新
             try! realm.write {
                 diary.createdDate = createdDate
+                diary.createdYmd = createdYmd
                 diary.content01 = content01
                 diary.content02 = content02
                 diary.content03 = content03

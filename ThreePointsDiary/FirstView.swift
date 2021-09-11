@@ -9,9 +9,6 @@ import SwiftUI
 
 struct FirstView: View, MyProtocol {
     
-    //Date型変数から詳細な情報を取り出すためのCalendarクラス
-    let calendar = Calendar(identifier: .gregorian)
-    
     //日記編集シートのオンオフ
     @State var isShowSheet = false
     
@@ -80,6 +77,7 @@ struct FirstView: View, MyProtocol {
     
     //Date型変数を曜日のみの文字列に変換する
     func weekdayText(inputDate: Date) -> String {
+        let calendar = Calendar(identifier: .gregorian)
         let weekdayNumber = calendar.component(.weekday, from: inputDate)
         let weekdaySymbolIndex: Int = weekdayNumber - 1
         let formatter: DateFormatter = DateFormatter()
@@ -99,4 +97,3 @@ protocol MyProtocol {
     func reloadDiaries()
     func getSelectedDiaryId() -> Int
 }
-
