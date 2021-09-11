@@ -14,22 +14,26 @@ struct SecondView: View{
     @State var selectedDate = Date()
         
     var body: some View {
-        
-        Form {
-            Section {
-                CalendarView(selectedDate: $selectedDate)
-                    .frame(height: 350)
-                    .onChange(of: selectedDate, perform: { value in
-                        searchDiary()
-                    })
+        NavigationView {
+            
+            Form {
+                Section {
+                    CalendarView(selectedDate: $selectedDate)
+                        .frame(height: 320)
+                        .onChange(of: selectedDate, perform: { value in
+                            searchDiary()
+                        })
+                }
+                Section(header: Text("2021年 9月 7日 火")) {
+                    Text("Homework completed")
+                    Text("Shopping done")
+                    Text("slept a lot")
+                }
             }
-            Section(header: Text("2021年 9月 7日 火")) {
-                Text("Homework completed")
-                Text("Shopping done")
-                Text("slept a lot")
-            }
+            
+            .navigationBarTitle("カレンダー")
+            
         }
-        
     }
         
     //選択された日に作成された日記を検索する
