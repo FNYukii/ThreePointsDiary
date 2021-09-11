@@ -44,7 +44,7 @@ struct FirstView: View, MyProtocol {
             }
                 
             //ナビゲーションバーの設定
-            .navigationBarTitle("3 Points Diary")
+            .navigationBarTitle("日記")
             .navigationBarItems(trailing:
                 Button(action: {
                     selectedDiaryId = 0

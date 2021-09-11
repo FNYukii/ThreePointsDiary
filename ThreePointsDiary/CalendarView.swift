@@ -20,6 +20,8 @@ struct CalendarView: UIViewRepresentable{
         fsCalendar.delegate = context.coordinator
         fsCalendar.dataSource = context.coordinator
         
+        //基本スタイル
+        fsCalendar.scrollDirection = .horizontal
         //ヘッダーのスタイル
         fsCalendar.appearance.headerTitleColor = UIColor.label
         fsCalendar.appearance.headerDateFormat = "yyyy年 M月"
