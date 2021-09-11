@@ -28,7 +28,7 @@ struct SecondView: View, MyProtocol{
             Form {
                 Section {
                     CalendarView(selectedDate: $selectedDate)
-                        .frame(height: 320)
+                        .frame(width: 310, height: 320)
                         .onChange(of: selectedDate, perform: { value in
                             searchDiary()
                         })
