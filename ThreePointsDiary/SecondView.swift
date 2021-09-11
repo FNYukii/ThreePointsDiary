@@ -33,8 +33,22 @@ struct SecondView: View{
             Section {
                 CalendarView(selectedDate: $selectedDate)
                     .frame(height: 400)
+                    .onChange(of: selectedDate, perform: { value in
+                        searchDiary()
+                    })
             }
             Text("\(selectedDate)")
+            ForEach(diaries.freeze()) { diary in
+                Section(header: Text("\(ymdText(inputDate: diary.createdDate)) \(weekdayText(inputDate: diary.createdDate))")) {
+                    Button("\(diary.content01)"){editDiary(diaryId: diary.id)}
+                        .foregroundColor(.primary)
+                    Button("\(diary.content02)"){editDiary(diaryId: diary.id)}
+                        .foregroundColor(.primary)
+                    Button("\(diary.content03)"){editDiary(diaryId: diary.id)}
+                        .foregroundColor(.primary)
+                }
+            }
+                
         }
         
     }
@@ -66,9 +80,28 @@ struct SecondView: View{
     
     //選択された日に作成された日記を検索する
     func searchDiary() {
-        print(selectedDate)
-//        let realm = try! Realm()
-//        diaries = realm.objects(Diary.self).filter("createdDate == \(selectedDate)")
+        let realm = try! Realm()
+        
+        //検索対象のDate変数を取得
+        let searchDate = selectedDate
+        
+        //開始日時
+        let calendar = Calendar(identifier: .gregorian)
+        let startDate = calendar.startOfDay(for: searchDate)
+        
+        //終了日時
+        var compornets = DateComponents()
+        compornets.year = calendar.component(.year, from: searchDate)
+        compornets.month = calendar.component(.month, from: searchDate)
+        compornets.day = calendar.component(.year, from: searchDate)
+        compornets.hour = 23
+        compornets.minute = 59
+        compornets.second = 59
+        let endDate = calendar.date(from: compornets)
+        
+        print("start: \(startDate), end: \(endDate)")
+
+//        diaries = realm.objects(Diary.self).filter("createdDate >= \(startDate) && createdDate < \(endDate)")
     }
     
 }
