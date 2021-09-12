@@ -26,7 +26,7 @@ struct SecondView: View, MyProtocol {
             Form {
                 
                 //検索バー
-                TextField("文字列で検索", text: $queryStr, onCommit: {searchDiary()})
+                TextField("テキストを入力", text: $queryStr, onCommit: {searchDiary()})
                 
                 //検索結果表示エリア
                 ForEach(diaries.freeze()) { diary in
