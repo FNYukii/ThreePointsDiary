@@ -2,16 +2,16 @@
 //  SecondView.swift
 //  ThreePointsDiary
 //
-//  Created by Yu on 2021/09/12.
+//  Created by Yu on 2021/09/10.
 //
 
 import SwiftUI
 import RealmSwift
 
-struct SecondView: View, MyProtocol {
+struct ThirdView: View, MyProtocol{
     
-    //検索文字列
-    @State var queryStr = ""
+    //カレンダー上で選択された日付
+    @State var selectedDate = Date()
     
     //表示する日記
     @State var diaries = Diary.noRecord()
@@ -19,19 +19,18 @@ struct SecondView: View, MyProtocol {
     @State var isShowSheet = false
     //編集対象の日記
     @State var selectedDiaryId = 0
-    
+        
     var body: some View {
         NavigationView {
             
             Form {
-                
-                //検索バー
-                TextField("文字列で検索", text: $queryStr)
-                    .onChange(of: queryStr, perform: { value in
-                        searchDiary()
-                    })
-                
-                //検索結果表示エリア
+                Section {
+                    CalendarView(selectedDate: $selectedDate)
+                        .frame(width: 310, height: 320)
+                        .onChange(of: selectedDate, perform: { value in
+                            searchDiary()
+                        })
+                }
                 ForEach(diaries.freeze()) { diary in
                     Section(header: Text("\(ymdText(inputDate: diary.createdDate)) \(weekdayText(inputDate: diary.createdDate))")) {
                         Button("\(diary.content01)"){editDiary(diaryId: diary.id)}
@@ -47,23 +46,14 @@ struct SecondView: View, MyProtocol {
                 }
             }
             
-            
             //日記を書くためのシート
             .sheet(isPresented: $isShowSheet) {
                 EditView(myProtocol: self)
             }
             
-            .navigationBarTitle("検索")
+            .navigationBarTitle("カレンダー")
             
         }
-    }
-    
-    func reloadDiaries() {
-        searchDiary()
-    }
-    
-    func getSelectedDiaryId() -> Int {
-        return selectedDiaryId
     }
     
     //タップした日記を編集
@@ -74,10 +64,13 @@ struct SecondView: View, MyProtocol {
         
     //選択された日に作成された日記を検索する
     func searchDiary() {
-        print("search \(queryStr)")
+        let calendar = Calendar(identifier: .gregorian)
+        let year = calendar.component(.year, from: selectedDate)
+        let month = calendar.component(.month, from: selectedDate)
+        let day = calendar.component(.day, from: selectedDate)
+        let selectedYmd = year * 10000 + month * 100 + day
         let realm = try! Realm()
-        diaries = realm.objects(Diary.self).filter("content01 CONTAINS '\(queryStr)' OR content02 CONTAINS '\(queryStr)' OR content03 CONTAINS '\(queryStr)'")
-        print("\(diaries.count) records found")
+        diaries = realm.objects(Diary.self).filter("createdYmd == \(selectedYmd)")
     }
     
     //Date型変数を年月日のみの文字列に変換する
@@ -97,6 +90,14 @@ struct SecondView: View, MyProtocol {
         let formatter: DateFormatter = DateFormatter()
         formatter.locale = NSLocale(localeIdentifier: "ja") as Locale
         return formatter.shortWeekdaySymbols[weekdaySymbolIndex]
+    }
+    
+    func reloadDiaries() {
+        searchDiary()
+    }
+    
+    func getSelectedDiaryId() -> Int {
+        return selectedDiaryId
     }
     
 }
