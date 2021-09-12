@@ -24,13 +24,15 @@ struct ThirdView: View, MyProtocol{
         NavigationView {
             
             Form {
-                Section {
-                    CalendarView(selectedDate: $selectedDate)
-                        .frame(width: 310, height: 320)
-                        .onChange(of: selectedDate, perform: { value in
-                            searchDiary()
-                        })
-                }
+                
+                //カレンダー
+                CalendarView(selectedDate: $selectedDate)
+                    .frame(width: 310, height: 320)
+                    .onChange(of: selectedDate, perform: { value in
+                        searchDiary()
+                    })
+                
+                //検索結果表示エリア
                 ForEach(diaries.freeze()) { diary in
                     Section(header: Text("\(ymdText(inputDate: diary.createdDate)) \(weekdayText(inputDate: diary.createdDate))")) {
                         Button("\(diary.content01)"){editDiary(diaryId: diary.id)}

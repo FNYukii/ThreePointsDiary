@@ -29,6 +29,7 @@ struct SecondView: View, MyProtocol {
                 TextField("文字列で検索", text: $queryStr)
                     .onChange(of: queryStr, perform: { value in
                         searchDiary()
+                        
                     })
                 
                 //検索結果表示エリア
