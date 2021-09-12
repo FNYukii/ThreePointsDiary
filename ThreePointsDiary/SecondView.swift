@@ -26,11 +26,7 @@ struct SecondView: View, MyProtocol {
             Form {
                 
                 //検索バー
-                TextField("文字列で検索", text: $queryStr)
-                    .onChange(of: queryStr, perform: { value in
-                        searchDiary()
-                        
-                    })
+                TextField("文字列で検索", text: $queryStr, onCommit: {searchDiary()})
                 
                 //検索結果表示エリア
                 ForEach(diaries.freeze()) { diary in
@@ -75,10 +71,8 @@ struct SecondView: View, MyProtocol {
         
     //選択された日に作成された日記を検索する
     func searchDiary() {
-        print("search \(queryStr)")
         let realm = try! Realm()
         diaries = realm.objects(Diary.self).filter("content01 CONTAINS '\(queryStr)' OR content02 CONTAINS '\(queryStr)' OR content03 CONTAINS '\(queryStr)'")
-        print("\(diaries.count) records found")
     }
     
     //Date型変数を年月日のみの文字列に変換する
