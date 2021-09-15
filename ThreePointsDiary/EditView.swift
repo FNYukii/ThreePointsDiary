@@ -82,8 +82,11 @@ struct EditView: View {
             //ナビゲーションバーの設定
             .navigationBarTitle(navBarTitle,displayMode: .inline)
             .navigationBarItems(
-                leading:Button("キャンセル"){
+                leading:Button(action: {
                     presentation.wrappedValue.dismiss()
+                }){
+                    Text("キャンセル")
+                        .fontWeight(.regular)
                 },
                 trailing:Button("完了"){
                     saveDiary()
